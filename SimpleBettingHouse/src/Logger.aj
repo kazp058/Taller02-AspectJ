@@ -34,7 +34,9 @@ public aspect Logger {
 		String s;
 		if("call(void com.bettinghouse.BettingHouse.effectiveLogOut(User))".compareTo(thisJoinPointStaticPart.toString()) == 1) {
 			s = "Sesion cerrada por usuario: [" + u.getNickname() + "]\tFecha: [" + Logger.getTime() + "]" + thisJoinPointStaticPart +"\n";
-
+			
+		}else if("call(void com.bettinghouse.BettingHouse.effectiveLogIn(User))".compareTo(thisJoinPointStaticPart.toString()) == 1) {
+			s = "Sesion abierta por usuario: [" + u.getNickname() + "]\tFecha: [" + Logger.getTime() + "]" + thisJoinPointStaticPart +"\n";
 		}
 		
 	}
