@@ -16,8 +16,6 @@ public aspect Logger {
 	}
 	
 	
-	pointcut signup(User u, Person p):
-		call(void com.betting.BettingHouse.succesfully.)
 	
 	
 }
