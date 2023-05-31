@@ -5,7 +5,16 @@ import com.bettinghouse.User;;
 
 public aspect Logger {
 	
-
+	public static Boolean createFile(String filename) {
+		File arch = new File(filename + ".txt");
+		try {
+			arch.createNewFile();
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	//Iniciar sesion
 	public static void writeToFile(String filename, String data) {
@@ -38,5 +47,14 @@ public aspect Logger {
 		}
 		
 	}
+	
+	pointcut signup(User u, Person p):
+		call(void com.bettinghouse.BettingHouse.successfulSignUp(User, Person))
+		&& args(u,p);
+	
+	after(User u, Person p): signup(u,p){
+		String s = "Usuario registrado: [" + u.toString() + "] Fecha: [" +  Logger.getTime() + "]\n";
+		Logger.writeToFile("Register", s);
+	}  
 
 }
